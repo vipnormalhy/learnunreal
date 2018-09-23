@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "FPSCharacter.h"
+#include "Components/CapsuleComponent.h"
 
 
 // Sets default values
@@ -9,6 +10,8 @@ AFPSCharacter::AFPSCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	FPSCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("SecondPersonCamera"));
+	FPSCameraComponent->SetupAttachment(GetCapsuleComponent());
 }
 
 // Called when the game starts or when spawned
@@ -20,13 +23,15 @@ void AFPSCharacter::BeginPlay()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Character begin play!"));
 	}
+
+	FPSCameraComponent->SetRelativeLocation(FVector(-100.0f, 0.0f, 100.0f));
+	FPSCameraComponent->bUsePawnControlRotation = true;
 }
 
 // Called every frame
 void AFPSCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Camera/CameraComponent.h"
 #include "FPSCharacter.generated.h"
 
 UCLASS()
@@ -37,4 +38,7 @@ public:
 
 	UFUNCTION()
 	void StopJump();
+
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* FPSCameraComponent;
 };
