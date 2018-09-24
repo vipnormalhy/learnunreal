@@ -12,6 +12,15 @@ AFPSCharacter::AFPSCharacter()
 
 	FPSCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("SecondPersonCamera"));
 	FPSCameraComponent->SetupAttachment(GetCapsuleComponent());
+
+	FPSCameraComponent->SetRelativeLocation(FVector(-500.0f, 0.0f, 100.0f));
+	FPSCameraComponent->bUsePawnControlRotation = true;
+
+	FPSMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("First player mesh componnet"));
+	FPSMesh->SetOnlyOwnerSee(true);
+	FPSMesh->SetupAttachment(FPSCameraComponent);
+	FPSMesh->bCastDynamicShadow = false;
+	FPSMesh->CastShadow = false;
 }
 
 // Called when the game starts or when spawned
@@ -24,8 +33,10 @@ void AFPSCharacter::BeginPlay()
 		GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Yellow, TEXT("Character begin play!"));
 	}
 
-	FPSCameraComponent->SetRelativeLocation(FVector(-100.0f, 0.0f, 100.0f));
+	FPSCameraComponent->SetRelativeLocation(FVector(-500.0f, 0.0f, 100.0f));
 	FPSCameraComponent->bUsePawnControlRotation = true;
+
+	GetMesh()->SetOwnerNoSee(true);
 }
 
 // Called every frame
