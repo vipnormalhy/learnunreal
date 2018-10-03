@@ -20,6 +20,8 @@ AFPSProjectile::AFPSProjectile()
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->bShouldBounce = true;
 	ProjectileMovementComponent->Bounciness = 0.3f;
+
+	InitialLifeSpan = 3.0f;
 }
 
 // Called when the game starts or when spawned
